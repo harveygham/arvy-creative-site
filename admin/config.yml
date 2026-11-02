@@ -1,0 +1,17 @@
+backend:
+  name: git-gateway
+  branch: main 
+
+media_folder: "images/uploads" 
+public_folder: "/images/uploads"
+
+collections:
+  - name: "portfolio"
+    label: "Portfolio Videos"
+    folder: "_videos"
+    create: true
+    slug: "{{year}}-{{month}}-{{slug}}"
+    fields:
+      - {label: "Title", name: "title", widget: "string"}
+      - {label: "YouTube/Vimeo Embed Link", name: "video_url", widget: "string"}
+      - {label: "Category (e.g. Wedding, Festival)", name: "category", widget: "string"}
