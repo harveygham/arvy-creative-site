@@ -18,13 +18,21 @@
     </header>
 
     <main class="max-w-6xl mx-auto p-6 md:p-12">
-        <section class="py-12 md:py-24">
-            <h2 class="text-4xl md:text-6xl font-extrabold leading-tight text-white mb-6">
-                Creative storytelling <br class="hidden md:block">events, brands, and life.
-            </h2>
-            <p class="text-lg text-zinc-400 max-w-2xl">
-                Specialising in festival coverage, wedding videography, and drone operations. Delivering professional digital media from the ground and the air.
-            </p>
+        <section class="relative w-full min-h-[60vh] flex items-center justify-start overflow-hidden rounded-2xl border border-zinc-800 mb-12 px-6 py-12 md:p-16">
+            <!-- Background Video -->
+            <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-30">
+                <source src="intro-bg.mp4" type="video/mp4">
+            </video>
+            
+            <!-- Foreground Text -->
+            <div class="relative z-10">
+                <h2 class="text-4xl md:text-6xl font-extrabold leading-tight text-white mb-6">
+                    Creative storytelling <br class="hidden md:block">events, brands, and life.
+                </h2>
+                <p class="text-lg text-zinc-400 max-w-2xl">
+                    Specialising in festival coverage, wedding videography, and drone operations. Delivering professional digital media from the ground and the air.
+                </p>
+            </div>
         </section>
 
         <section id="work" class="py-12">
