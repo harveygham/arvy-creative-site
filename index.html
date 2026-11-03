@@ -13,7 +13,7 @@
     <section class="relative w-full h-screen flex flex-col justify-center overflow-hidden">
         
         <!-- Background Video -->
-        <video autoplay loop muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40">
+        <video id="hero-bg-video" autoplay muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40">
             <source src="intro-bg.mp4" type="video/mp4">
         </video>
         
@@ -24,6 +24,7 @@
         <header class="absolute top-0 inset-x-0 z-20 max-w-6xl mx-auto w-full p-6 md:p-12 flex justify-between items-center">
             <h1 class="text-2xl md:text-3xl font-bold tracking-tighter text-white">arvy.creative.</h1>
             <nav class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="hover:text-white transition-colors">ABOUT</a>
                 <a href="#work" class="hover:text-white transition-colors">WORK</a>
                 <a href="#services" class="hover:text-white transition-colors">SERVICES</a>
                 <a href="mailto:harvey.gilham@outlook.com" class="hover:text-white transition-colors">CONTACT</a>
@@ -43,6 +44,101 @@
 
     <!-- Main Content Section -->
     <main class="max-w-6xl mx-auto p-6 md:p-12 relative z-10">
+
+        <!-- About Me Section -->
+        <section id="about" class="py-12 scroll-mt-8">
+            <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-zinc-500">About Me</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
+
+                <!-- Portrait -->
+                <div class="md:col-span-2">
+                    <div class="relative aspect-[4/5] w-full max-w-sm mx-auto md:mx-0 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-7xl font-extrabold tracking-tighter text-zinc-800 select-none">HG</span>
+                        </div>
+                        <img src="images/about/portrait.jpg" alt="Harvey, the filmmaker behind arvy.creative"
+                             class="absolute inset-0 w-full h-full object-cover"
+                             onerror="this.remove()">
+                    </div>
+                </div>
+
+                <!-- Bio -->
+                <div class="md:col-span-3">
+                    <h4 class="text-2xl md:text-3xl font-extrabold leading-tight text-white mb-6">
+                        Hi, I'm Harvey &mdash; the camera behind arvy.creative.
+                    </h4>
+                    <div class="space-y-4 text-zinc-300 leading-relaxed">
+                        <p>
+                            I'm a videographer and drone operator who loves capturing the energy of a moment as it happens &mdash;
+                            whether that's a packed festival crowd, the quiet emotion of a wedding day, or a sweeping shot from a few hundred feet up.
+                        </p>
+                        <p>
+                            I work closely with every client to understand the story they want to tell, then shoot and edit
+                            polished films that feel natural, cinematic and true to the day.
+                        </p>
+                        <p class="text-zinc-400">
+                            When I'm not filming, you'll usually find me [add something about yourself here].
+                        </p>
+                    </div>
+
+                    <!-- Skills / kit -->
+                    <ul class="flex flex-wrap gap-2 mt-8 text-xs font-medium tracking-wide">
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">FESTIVAL COVERAGE</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">WEDDING FILMS</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">DRONE / AERIAL</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">EDITING &amp; COLOUR</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">SOCIAL CONTENT</li>
+                    </ul>
+
+                    <a href="mailto:harvey.gilham@outlook.com"
+                       class="inline-flex items-center gap-2 mt-8 px-5 py-3 rounded-md bg-white text-zinc-950 text-sm font-bold tracking-wide hover:bg-zinc-200 transition-colors">
+                        LET'S WORK TOGETHER <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Work highlights -->
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 mt-16">
+                <a href="#work" class="group block">
+                    <div class="relative aspect-[4/3] rounded-lg overflow-hidden border border-zinc-800 bg-gradient-to-br from-zinc-800 to-zinc-900">
+                        <img src="images/about/festival.jpg" alt="Festival coverage"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <p class="text-xs tracking-widest text-zinc-400">01</p>
+                            <p class="text-lg font-bold text-white">Festivals</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="#work" class="group block">
+                    <div class="relative aspect-[4/3] rounded-lg overflow-hidden border border-zinc-800 bg-gradient-to-br from-zinc-800 to-zinc-900">
+                        <img src="images/about/wedding.jpg" alt="Wedding videography"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <p class="text-xs tracking-widest text-zinc-400">02</p>
+                            <p class="text-lg font-bold text-white">Weddings</p>
+                        </div>
+                    </div>
+                </a>
+                <a href="#work" class="group block">
+                    <div class="relative aspect-[4/3] rounded-lg overflow-hidden border border-zinc-800 bg-gradient-to-br from-zinc-800 to-zinc-900">
+                        <img src="images/about/drone.jpg" alt="Drone and aerial footage"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-x-0 bottom-0 h-2/3 bg-gradient-to-t from-zinc-950/90 to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 p-4">
+                            <p class="text-xs tracking-widest text-zinc-400">03</p>
+                            <p class="text-lg font-bold text-white">Drone &amp; Aerial</p>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </section>
+
         <section id="work" class="py-12">
             <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-zinc-500">Selected Work</h3>
             <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -66,6 +162,18 @@
                 }
             });
         }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const bgVideo = document.getElementById("hero-bg-video");
+            
+            if (bgVideo) {
+                bgVideo.addEventListener("ended", function() {
+                    setTimeout(function() {
+                        bgVideo.play();
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                });
+            }
+        });
     </script>
 </body>
 </html>
