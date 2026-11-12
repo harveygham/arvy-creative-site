@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>arvy.creative| Video Production & Media</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://identity.netlify.com/v1/netlify-identity-widget.js"></script>
+</head>
+<body class="bg-zinc-950 text-zinc-200 font-sans antialiased selection:bg-zinc-700">
+
+    <!-- Full-Screen Video Hero Section -->
+    <section class="relative w-full h-screen flex flex-col justify-center overflow-hidden">
+        
+        <!-- Background Video -->
+        <video id="hero-bg-video" autoplay muted playsinline class="absolute inset-0 w-full h-full object-cover z-0 opacity-40">
+            <source src="intro-bg.mp4" type="video/mp4">
+        </video>
+        
+        <!-- Gradient division fade at the bottom of the video -->
+        <div class="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-zinc-950 to-transparent z-0"></div>
+
+        <!-- Overlaid Header -->
+        <header class="absolute top-0 inset-x-0 z-20 max-w-6xl mx-auto w-full p-6 md:p-12 flex justify-between items-center">
+            <h1 class="text-2xl md:text-3xl font-bold tracking-tighter text-white">arvy.creative</h1>
+            <nav class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+                <a href="#about" class="hover:text-white transition-colors">ABOUT</a>
+                <a href="projects.html" class="hover:text-white transition-colors">PROJECTS</a>
+                <a href="#services" class="hover:text-white transition-colors">SERVICES</a>
+                <a href="mailto:harvey.gilham@outlook.com" class="hover:text-white transition-colors">CONTACT</a>
+            </nav>
+        </header>
+
+        <!-- Foreground Text -->
+        <div class="relative z-10 max-w-6xl mx-auto w-full px-6 md:px-12 mt-12 md:mt-0">
+            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-6 drop-shadow-lg">
+                Creative storytelling bringing <br class="hidden md:block">events & brands to life.
+            </h2>
+            <p class="text-lg text-zinc-300 max-w-2xl drop-shadow-md">
+                Specialising in festival coverage, wedding videography, and drone operations. Delivering professional digital media from the ground and the air.
+            </p>
+        </div>
+    </section>
+
+    <!-- Main Content Section -->
+    <main class="max-w-6xl mx-auto p-6 md:p-12 relative z-10">
+
+        <!-- About Me Section -->
+        <section id="about" class="py-12 scroll-mt-8">
+            <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-zinc-500">About Me</h3>
+
+            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
+
+                <!-- Portrait -->
+                <div class="md:col-span-2">
+                    <div class="relative aspect-[4/5] w-full max-w-sm mx-auto md:mx-0 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <span class="text-7xl font-extrabold tracking-tighter text-zinc-800 select-none">HG</span>
+                        </div>
+                        <img src="images/about/portrait.jpg" alt="Harvey, the filmmaker behind arvy.creative"
+                             class="absolute inset-0 w-full h-full object-cover"
+                             onerror="this.remove()">
+                    </div>
+                </div>
+
+                <!-- Bio -->
+                <div class="md:col-span-3">
+                    <h4 class="text-2xl md:text-3xl font-extrabold leading-tight text-white mb-6">
+                        Hi, I'm Harvey &mdash; the man behind the camera.
+                    </h4>
+                    <div class="space-y-4 text-zinc-300 leading-relaxed">
+                        <p>
+                            I'm a videographer and drone operator who loves capturing the energy of a moment as it happens
+                            whether that's in the crowd or on stage at a festival, or capturing every emotion of a wedding day, 
+                            or even watching from a few hundred feet up in the air.
+                        </p>
+                        <p>
+                            I work closely with every client to understand the story they want to tell, then shoot and edit
+                            quality films that feel natural, cinematic and true to the day.
+                        </p>
+                        <p class="text-zinc-400">
+                            When I'm not filming, you'll usually find me with my camera or drone close nearby, because some
+                            things are better captured in the moment! You might also find me running to my favourite playlist,
+                            most likely pushing my pace when it gets to a good part of a song 🎵 
+                       </p>
+                    </div>
+
+                    <!-- Skills / kit -->
+                    <ul class="flex flex-wrap gap-2 mt-8 text-xs font-medium tracking-wide">
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">FESTIVAL FILMS</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">WEDDING FILMS</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">DRONE / AERIAL</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">EDITING &amp; COLOUR</li>
+                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">SOCIAL MEDIA</li>
+                    </ul>
+
+                    <a href="mailto:harvey.gilham@outlook.com"
+                       class="inline-flex items-center gap-2 mt-8 px-5 py-3 rounded-md bg-white text-zinc-950 text-sm font-bold tracking-wide hover:bg-zinc-200 transition-colors">
+                        LET'S WORK TOGETHER <span aria-hidden="true">&rarr;</span>
+                    </a>
+                </div>
+
+        </section>
+
+        <section id="work" class="py-12">
+            <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-zinc-500">Selected Work</h3>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Video Embed 1 -->
+                <div class="aspect-video bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 shadow-xl">
+                    <iframe class="w-full h-full" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Showreel" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+                <!-- Video Embed 2 -->
+                <div class="aspect-video bg-zinc-900 rounded-lg overflow-hidden border border-zinc-800 shadow-xl">
+                     <iframe class="w-full h-full" src="https://www.youtube.com/embed/YOUR_VIDEO_ID" title="Wedding Highlight" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                </div>
+            </div>
+            <a href="projects.html" class="inline-flex items-center gap-2 mt-8 text-sm font-bold tracking-wide text-white hover:text-zinc-300 transition-colors">
+                VIEW ALL PROJECTS <span aria-hidden="true">&rarr;</span>
+            </a>
+        </section>
+    </main>
+
+    <script>
+        if (window.netlifyIdentity) {
+            window.netlifyIdentity.on("init", user => {
+                if (!user) {
+                    window.netlifyIdentity.on("login", () => { document.location.href = "/admin/"; });
+                }
+            });
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const bgVideo = document.getElementById("hero-bg-video");
+            
+            if (bgVideo) {
+                bgVideo.addEventListener("ended", function() {
+                    setTimeout(function() {
+                        bgVideo.play();
+                    }, 5000); // 5000 milliseconds = 5 seconds
+                });
+            }
+        });
+    </script>
+</body>
+</html>

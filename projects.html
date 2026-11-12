@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Projects | arvy.creative</title>
+    <meta name="description" content="Festival, wedding and drone films by arvy.creative.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Tile hover: image greys out and zooms slightly, title + button fade up */
+        .tile img { transition: filter .4s ease, transform .6s ease; }
+        .tile .tile-info { transition: opacity .3s ease-in-out, transform .3s ease-in-out; }
+        @media (hover: hover) {
+            .tile .tile-info { opacity: 0; transform: translateY(8px); }
+            .tile:hover img, .tile:focus-within img { filter: grayscale(1) brightness(.7); transform: scale(1.03); }
+            .tile:hover .tile-info, .tile:focus-within .tile-info { opacity: 1; transform: none; }
+        }
+        body.lightbox-open { overflow: hidden; }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 font-sans antialiased selection:bg-zinc-700">
+
+    <!-- Header -->
+    <header class="absolute top-0 inset-x-0 z-20 max-w-6xl mx-auto w-full p-6 md:p-12 flex justify-between items-center">
+        <a href="index.html" class="text-2xl md:text-3xl font-bold tracking-tighter text-white">arvy.creative</a>
+        <nav class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+            <a href="index.html#about" class="hover:text-white transition-colors">ABOUT</a>
+            <a href="projects.html" class="text-white">PROJECTS</a>
+            <a href="index.html#services" class="hover:text-white transition-colors">SERVICES</a>
+            <a href="mailto:harvey.gilham@outlook.com" class="hover:text-white transition-colors">CONTACT</a>
+        </nav>
+        <a href="index.html" class="md:hidden text-xs font-medium tracking-wide hover:text-white">&larr; HOME</a>
+    </header>
+
+    <!-- Page heading -->
+    <section class="relative pt-36 md:pt-48 pb-12">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <p class="text-xs font-medium tracking-widest text-zinc-500 mb-4">
+                <a href="index.html" class="hover:text-white transition-colors">HOME</a> <span class="mx-2">&rsaquo;</span> PROJECTS
+            </p>
+            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-4">My Projects</h2>
+            <p class="text-zinc-400 max-w-2xl">
+                A selection of festival, wedding and aerial films. Some projects aren't shown here at the client's request.
+            </p>
+
+            <!-- Category filter -->
+            <div id="filters" class="flex flex-wrap gap-2 mt-8 text-xs font-medium tracking-wide"></div>
+        </div>
+    </section>
+
+    <!-- Project mosaic (full width, like a film wall) -->
+    <main id="projects" class="flex flex-col gap-1 pb-1"></main>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 mt-16">
+        <div class="max-w-6xl mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+            <div>
+                <p class="text-white text-xl font-bold mb-1">Got a project in mind?</p>
+                <p class="text-zinc-400 text-sm">I'm always adding new work, so get in touch to talk about yours.</p>
+            </div>
+            <a href="mailto:harvey.gilham@outlook.com"
+               class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white text-zinc-950 text-sm font-bold tracking-wide hover:bg-zinc-200 transition-colors self-start">
+                LET'S WORK TOGETHER <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+        <p class="max-w-6xl mx-auto px-6 md:px-12 pb-8 text-xs text-zinc-600">&copy; <span id="year"></span> arvy.creative</p>
+    </footer>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/90 p-4 md:p-10" role="dialog" aria-modal="true" aria-label="Project film">
+        <button id="lightbox-close" class="absolute top-4 right-4 md:top-6 md:right-6 text-zinc-300 hover:text-white text-4xl leading-none" aria-label="Close">&times;</button>
+        <div class="w-full max-w-6xl">
+            <div class="aspect-video bg-black rounded-lg overflow-hidden shadow-2xl">
+                <iframe id="lightbox-frame" class="w-full h-full" src="" title="Project film" frameborder="0"
+                        allow="autoplay; fullscreen; picture-in-picture; encrypted-media" allowfullscreen></iframe>
+            </div>
+            <p id="lightbox-title" class="mt-4 text-sm font-semibold uppercase tracking-widest text-zinc-300"></p>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================================
+           YOUR PROJECTS — edit this list to add/remove films.
+           title:     shown on the tile (displayed in capitals)
+           category:  used for the filter buttons
+           video:     any YouTube or Vimeo link (normal or embed URL)
+           thumbnail: optional image path, e.g. "images/projects/boardmasters.jpg".
+                      Leave it out for YouTube and the video's own thumbnail is used.
+           Order matters: tiles go in sets of three (1 large + 2 small),
+           so put your strongest film first in each set.
+           ========================================================= */
+        const PROJECTS = [
+            { title: "Festival Showreel",       category: "Festival", video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
+            { title: "Wedding Highlight",       category: "Wedding",  video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
+            { title: "Coastline From Above",    category: "Drone",    video: "https://vimeo.com/YOUR_VIDEO_ID" },
+            { title: "Summer Festival Aftermovie", category: "Festival", video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
+            { title: "Countryside Wedding",     category: "Wedding",  video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
+            { title: "Aerial Reel",             category: "Drone",    video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
+        ];
+
+        /* ---------- helpers ---------- */
+        function parseVideo(url) {
+            let m;
+            if ((m = url.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{6,})/)))
+                return { type: "youtube", id: m[1] };
+            if ((m = url.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
+                return { type: "vimeo", id: m[1] };
+            return { type: "other", id: null };
+        }
+        function embedUrl(url) {
+            const v = parseVideo(url);
+            if (v.type === "youtube") return `https://www.youtube.com/embed/${v.id}?autoplay=1&rel=0`;
+            if (v.type === "vimeo")   return `https://player.vimeo.com/video/${v.id}?autoplay=1&title=0&byline=0`;
+            return url;
+        }
+        function thumbFor(p) {
+            if (p.thumbnail) return p.thumbnail;
+            const v = parseVideo(p.video);
+            if (v.type === "youtube" && v.id !== "YOUR_VIDEO_ID") return `https://i.ytimg.com/vi/${v.id}/maxresdefault.jpg`;
+            return null;
+        }
+        const esc = s => s.replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+        /* ---------- tiles ---------- */
+        function tileHTML(p, idx, big, place = "") {
+            const thumb = thumbFor(p);
+            const img = thumb
+                ? `<img src="${esc(thumb)}" alt="" loading="lazy" class="absolute inset-0 w-full h-full object-cover"
+                        onerror="if(this.src.includes('maxresdefault')){this.src=this.src.replace('maxresdefault','hqdefault')}else{this.remove()}">`
+                : "";
+            return `
+            <article class="tile group relative overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 ${big ? "md:col-span-2 md:row-span-2" : ""} ${place}">
+                <span class="absolute inset-0 flex items-center justify-center text-zinc-700 font-extrabold tracking-tighter ${big ? "text-5xl" : "text-3xl"} select-none">${esc(p.category || "")}</span>
+                ${img}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/10 to-transparent pointer-events-none"></div>
+                <div class="tile-info absolute inset-x-0 bottom-0 p-5 md:p-8">
+                    <p class="text-[11px] font-medium tracking-widest text-zinc-300 mb-1 uppercase">${esc(p.category || "")}</p>
+                    <h3 class="text-white font-semibold uppercase ${big ? "text-2xl md:text-3xl" : "text-xl"} mb-4">${esc(p.title)}</h3>
+                    <button type="button" data-idx="${idx}"
+                            class="watch inline-flex items-center gap-2 px-4 py-2.5 rounded-md bg-white text-zinc-950 text-xs font-bold tracking-wide hover:bg-zinc-200 transition-colors">
+                        <span aria-hidden="true">&#9654;</span> WATCH FILM
+                    </button>
+                </div>
+            </article>`;
+        }
+
+        // Groups of three: one large tile + two stacked small tiles, alternating sides each row.
+        function render(list) {
+            const wrap = document.getElementById("projects");
+            if (!list.length) { wrap.innerHTML = `<p class="max-w-6xl mx-auto px-6 md:px-12 text-zinc-500">No projects in this category yet.</p>`; return; }
+            let html = "";
+            for (let g = 0; g < list.length; g += 3) {
+                const group = list.slice(g, g + 3);
+                const flip = (g / 3) % 2 === 1; // every other row puts the large tile on the right
+                if (group.length === 1) {
+                    const p = group[0];
+                    html += `<div class="grid grid-cols-1 aspect-video md:aspect-[3/1]">${tileHTML(p, PROJECTS.indexOf(p), false).replace("text-xl","text-2xl md:text-3xl")}</div>`;
+                    continue;
+                }
+                // On flipped rows the large tile is pinned to columns 2–3 and the small ones to column 1
+                const tiles = group.map((p, i) => {
+                    const big = i === 0;
+                    const place = !flip ? "" : big ? "md:col-start-2 md:row-start-1" : `md:col-start-1 md:row-start-${i}`;
+                    return tileHTML(p, PROJECTS.indexOf(p), big, place);
+                });
+                html += `<div class="grid grid-cols-1 md:grid-cols-3 md:grid-rows-2 gap-1 auto-rows-[56vw] md:auto-rows-auto md:h-[min(56vw,760px)]">${tiles.join("")}</div>`;
+            }
+            wrap.innerHTML = html;
+        }
+
+        /* ---------- filters ---------- */
+        function buildFilters() {
+            const cats = ["All", ...new Set(PROJECTS.map(p => p.category).filter(Boolean))];
+            const box = document.getElementById("filters");
+            if (cats.length < 3) { box.remove(); return; } // no point filtering a single category
+            box.innerHTML = cats.map((c, i) =>
+                `<button type="button" data-cat="${esc(c)}" class="filter px-3 py-1.5 rounded-full border transition-colors ${i === 0 ? "border-white bg-white text-zinc-950" : "border-zinc-700 text-zinc-300 hover:border-zinc-400"}">${esc(c.toUpperCase())}</button>`
+            ).join("");
+            box.addEventListener("click", e => {
+                const btn = e.target.closest(".filter"); if (!btn) return;
+                box.querySelectorAll(".filter").forEach(b => {
+                    const on = b === btn;
+                    b.classList.toggle("bg-white", on); b.classList.toggle("text-zinc-950", on); b.classList.toggle("border-white", on);
+                    b.classList.toggle("text-zinc-300", !on); b.classList.toggle("border-zinc-700", !on);
+                });
+                const cat = btn.dataset.cat;
+                render(cat === "All" ? PROJECTS : PROJECTS.filter(p => p.category === cat));
+            });
+        }
+
+        /* ---------- lightbox ---------- */
+        const lb = document.getElementById("lightbox");
+        const frame = document.getElementById("lightbox-frame");
+        let lastFocus = null;
+        function openLightbox(p) {
+            lastFocus = document.activeElement;
+            frame.src = embedUrl(p.video);
+            document.getElementById("lightbox-title").textContent = p.title;
+            lb.classList.remove("hidden"); lb.classList.add("flex");
+            document.body.classList.add("lightbox-open");
+            document.getElementById("lightbox-close").focus();
+        }
+        function closeLightbox() {
+            frame.src = ""; // stops playback
+            lb.classList.add("hidden"); lb.classList.remove("flex");
+            document.body.classList.remove("lightbox-open");
+            if (lastFocus) lastFocus.focus();
+        }
+        document.getElementById("projects").addEventListener("click", e => {
+            const btn = e.target.closest(".watch");
+            if (btn) openLightbox(PROJECTS[+btn.dataset.idx]);
+        });
+        document.getElementById("lightbox-close").addEventListener("click", closeLightbox);
+        lb.addEventListener("click", e => { if (e.target === lb) closeLightbox(); });
+        document.addEventListener("keydown", e => { if (e.key === "Escape" && !lb.classList.contains("hidden")) closeLightbox(); });
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+        buildFilters();
+        render(PROJECTS);
+    </script>
+</body>
+</html>
