@@ -41,64 +41,144 @@
         </div>
     </section>
 
-    <!-- Main Content Section -->
-    <main class="max-w-6xl mx-auto p-6 md:p-12 relative z-10">
+    <!-- Main Content -->
+    <main class="relative z-10">
 
         <!-- About Me Section -->
-        <section id="about" class="py-12 scroll-mt-8">
-            <h3 class="text-xl font-bold mb-8 uppercase tracking-widest text-zinc-500">About Me</h3>
+        <section id="about" class="relative pt-16 md:pt-24 pb-20 md:pb-28 scroll-mt-8">
 
-            <div class="grid grid-cols-1 md:grid-cols-5 gap-10 md:gap-14 items-start">
+            <!-- Background image band -->
+            <div class="absolute inset-x-0 top-0 h-[55%] md:h-[72%] overflow-hidden">
+                <img src="images/about/about-bg.jpg" alt="" aria-hidden="true"
+                     class="w-full h-full object-cover opacity-80">
+                <div class="absolute inset-0 bg-gradient-to-r from-zinc-950/10 via-zinc-950/40 to-zinc-950/80"></div>
+                <div class="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-zinc-950 to-transparent"></div>
+            </div>
 
-                <!-- Portrait -->
-                <div class="md:col-span-2">
-                    <div class="relative aspect-[4/5] w-full max-w-sm mx-auto md:mx-0 rounded-lg overflow-hidden border border-zinc-800 bg-zinc-900 shadow-xl">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <span class="text-7xl font-extrabold tracking-tighter text-zinc-800 select-none">HG</span>
+            <!-- Overlapping card -->
+            <div class="relative max-w-6xl mx-auto px-6 md:px-12">
+                <div class="relative md:ml-auto md:w-[68%] overflow-hidden bg-zinc-900 border border-zinc-800 shadow-2xl p-8 md:p-14">
+
+                    <!-- Subtle contour-line texture -->
+                    <svg class="absolute -right-24 -top-24 w-[28rem] h-[28rem] text-white/[0.04] pointer-events-none" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.6" aria-hidden="true">
+                        <ellipse cx="100" cy="100" rx="20" ry="14"/><ellipse cx="100" cy="100" rx="34" ry="25"/>
+                        <ellipse cx="100" cy="100" rx="48" ry="37"/><ellipse cx="100" cy="100" rx="62" ry="49"/>
+                        <ellipse cx="100" cy="100" rx="76" ry="61"/><ellipse cx="100" cy="100" rx="90" ry="73"/>
+                    </svg>
+                    <svg class="absolute -left-32 -bottom-32 w-[24rem] h-[24rem] text-white/[0.04] pointer-events-none" viewBox="0 0 200 200" fill="none" stroke="currentColor" stroke-width="0.6" aria-hidden="true">
+                        <ellipse cx="100" cy="100" rx="24" ry="18"/><ellipse cx="100" cy="100" rx="42" ry="32"/>
+                        <ellipse cx="100" cy="100" rx="60" ry="46"/><ellipse cx="100" cy="100" rx="78" ry="60"/>
+                    </svg>
+
+                    <div class="relative">
+                        <p class="text-xs font-semibold tracking-[0.35em] uppercase text-zinc-400 mb-5">About Me</p>
+                        <h3 class="text-3xl md:text-4xl font-extrabold leading-tight text-white mb-6">
+                            Hi, I'm Harvey &mdash; the man behind the camera.
+                        </h3>
+                        <p class="italic font-semibold text-zinc-300 mb-6">
+                            &ldquo;Capturing the energy of a moment as it happens.&rdquo;
+                        </p>
+                        <div class="space-y-4 text-sm md:text-base text-zinc-400 leading-relaxed">
+                            <p>
+                                I'm a videographer and drone operator who loves capturing the energy of a moment as it happens,
+                                whether that's in the crowd or on stage at a festival, capturing every emotion of a wedding day,
+                                or watching from a few hundred feet up in the air.
+                            </p>
+                            <p>
+                                I work closely with every client to understand the story they want to tell, then shoot and edit
+                                quality films that feel natural, cinematic and true to the day.
+                            </p>
+                            <p>
+                                When I'm not filming, you'll usually find me with my camera or drone close by, because some
+                                things are better captured in the moment! You might also find me running to my favourite playlist,
+                                most likely pushing my pace when it gets to a good part of a song 🎵
+                            </p>
                         </div>
-                        <img src="images/about/portrait.jpg" alt="Harvey, the filmmaker behind arvy.creative"
-                             class="absolute inset-0 w-full h-full object-cover"
-                             onerror="this.remove()">
+
+                        <!-- Highlights -->
+                        <div class="grid grid-cols-2 gap-6 mt-10 pt-8 border-t border-zinc-800">
+                            <div>
+                                <p class="text-2xl md:text-4xl font-extrabold text-white tracking-tight">Ground + Air</p>
+                                <p class="mt-2 text-xs font-semibold tracking-[0.2em] uppercase text-zinc-500">Every angle covered</p>
+                            </div>
+                            <div>
+                                <p class="text-2xl md:text-4xl font-extrabold text-white tracking-tight">Shoot to Edit</p>
+                                <p class="mt-2 text-xs font-semibold tracking-[0.2em] uppercase text-zinc-500">One person, start to finish</p>
+                            </div>
+                        </div>
+
+                        <a href="mailto:harvey.gilham@outlook.com"
+                           class="inline-flex items-center gap-2 mt-10 px-6 py-3 bg-white text-zinc-950 text-xs font-bold tracking-[0.2em] hover:bg-zinc-200 transition-colors">
+                            LET'S WORK TOGETHER <span aria-hidden="true">&rarr;</span>
+                        </a>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Bio -->
-                <div class="md:col-span-3">
-                    <h4 class="text-2xl md:text-3xl font-extrabold leading-tight text-white mb-6">
-                        Hi, I'm Harvey &mdash; the man behind the camera.
-                    </h4>
-                    <div class="space-y-4 text-zinc-300 leading-relaxed">
-                        <p>
-                            I'm a videographer and drone operator who loves capturing the energy of a moment as it happens
-                            whether that's in the crowd or on stage at a festival, or capturing every emotion of a wedding day, 
-                            or even watching from a few hundred feet up in the air.
-                        </p>
-                        <p>
-                            I work closely with every client to understand the story they want to tell, then shoot and edit
-                            quality films that feel natural, cinematic and true to the day.
-                        </p>
-                        <p class="text-zinc-400">
-                            When I'm not filming, you'll usually find me with my camera or drone close nearby, because some
-                            things are better captured in the moment! You might also find me running to my favourite playlist,
-                            most likely pushing my pace when it gets to a good part of a song 🎵 
-                       </p>
-                    </div>
+        <!-- Services Section -->
+        <section id="services" class="bg-zinc-900 py-20 md:py-28 scroll-mt-8">
+            <div class="max-w-6xl mx-auto px-6 md:px-12">
+                <div class="text-center mb-14 md:mb-16">
+                    <p class="text-xs font-semibold tracking-[0.35em] uppercase text-zinc-400 mb-4">Services</p>
+                    <h3 class="text-3xl md:text-4xl font-extrabold text-white">From the Crowd to the Clouds</h3>
+                </div>
 
-                    <!-- Skills / kit -->
-                    <ul class="flex flex-wrap gap-2 mt-8 text-xs font-medium tracking-wide">
-                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">FESTIVAL FILMS</li>
-                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">WEDDING FILMS</li>
-                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">DRONE / AERIAL</li>
-                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">EDITING &amp; COLOUR</li>
-                        <li class="px-3 py-1.5 rounded-full border border-zinc-700 text-zinc-300">SOCIAL MEDIA</li>
-                    </ul>
+                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:items-start lg:pb-16">
 
-                    <a href="mailto:harvey.gilham@outlook.com"
-                       class="inline-flex items-center gap-2 mt-8 px-5 py-3 rounded-md bg-white text-zinc-950 text-sm font-bold tracking-wide hover:bg-zinc-200 transition-colors">
-                        LET'S WORK TOGETHER <span aria-hidden="true">&rarr;</span>
+                    <!-- Card 1 -->
+                    <a href="/projects" class="group relative block aspect-[4/5] lg:aspect-[2/3] overflow-hidden bg-zinc-800 shadow-xl">
+                        <img src="images/services/festival.jpg" alt="Festival stage with pyrotechnics"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">Festival Films</h4>
+                            <p class="text-sm text-zinc-300 leading-relaxed">Aftermovies, artist content and crowd coverage that capture the energy of the day.</p>
+                            <span class="inline-flex items-center gap-2 mt-4 text-xs font-bold tracking-[0.2em] text-white/80 group-hover:text-white">VIEW WORK <span aria-hidden="true">&rarr;</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Card 2 (offset down on desktop) -->
+                    <a href="/projects" class="group relative block aspect-[4/5] lg:aspect-[2/3] overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-800 shadow-xl lg:translate-y-16">
+                        <img src="images/services/wedding.jpg" alt="Wedding film still"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">Wedding Films</h4>
+                            <p class="text-sm text-zinc-300 leading-relaxed">Natural, cinematic films that hold on to every emotion of your day.</p>
+                            <span class="inline-flex items-center gap-2 mt-4 text-xs font-bold tracking-[0.2em] text-white/80 group-hover:text-white">VIEW WORK <span aria-hidden="true">&rarr;</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Card 3 -->
+                    <a href="/projects" class="group relative block aspect-[4/5] lg:aspect-[2/3] overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-800 shadow-xl lg:-translate-y-4">
+                        <img src="images/services/drone.jpg" alt="Aerial drone shot"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">Drone &amp; Aerial</h4>
+                            <p class="text-sm text-zinc-300 leading-relaxed">Striking aerial footage that shows events and locations from a fresh perspective.</p>
+                            <span class="inline-flex items-center gap-2 mt-4 text-xs font-bold tracking-[0.2em] text-white/80 group-hover:text-white">VIEW WORK <span aria-hidden="true">&rarr;</span></span>
+                        </div>
+                    </a>
+
+                    <!-- Card 4 (offset down on desktop) -->
+                    <a href="/projects" class="group relative block aspect-[4/5] lg:aspect-[2/3] overflow-hidden bg-gradient-to-br from-zinc-700 to-zinc-800 shadow-xl lg:translate-y-10">
+                        <img src="images/services/editing.jpg" alt="Editing and colour grading"
+                             class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                             onerror="this.remove()">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+                        <div class="absolute inset-x-0 bottom-0 p-6">
+                            <h4 class="text-xl font-bold text-white mb-2">Editing &amp; Colour</h4>
+                            <p class="text-sm text-zinc-300 leading-relaxed">Full edit and colour grade, plus cut-downs ready for social media.</p>
+                            <span class="inline-flex items-center gap-2 mt-4 text-xs font-bold tracking-[0.2em] text-white/80 group-hover:text-white">VIEW WORK <span aria-hidden="true">&rarr;</span></span>
+                        </div>
                     </a>
                 </div>
-
+            </div>
         </section>
     </main>
 
