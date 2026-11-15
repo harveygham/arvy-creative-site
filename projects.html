@@ -26,6 +26,7 @@
         <nav class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
             <a href="/#about" class="hover:text-white transition-colors">ABOUT</a>
             <a href="/projects" class="text-white">PROJECTS</a>
+            <a href="/gallery" class="hover:text-white transition-colors">GALLERY</a>
             <a href="mailto:harvey.gilham@outlook.com" class="hover:text-white transition-colors">CONTACT</a>
         </nav>
         <a href="/" class="md:hidden text-xs font-medium tracking-wide hover:text-white">&larr; HOME</a>
@@ -39,7 +40,7 @@
             </p>
             <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-4">My Projects</h2>
             <p class="text-zinc-400 max-w-2xl">
-                A selection of festival, wedding and aerial films. Some projects aren't shown here at the client's request.
+                A selection of festival, promo and event films. Some projects aren't shown here at the client's request.
             </p>
 
             <!-- Category filter -->
@@ -85,6 +86,9 @@
            video:     any YouTube or Vimeo link (normal or embed URL)
            thumbnail: optional image path, e.g. "images/projects/boardmasters.jpg".
                       Leave it out for YouTube and the video's own thumbnail is used.
+           hidden:    add  hidden: true  to keep a film in the list but off the site.
+           Any entry still using a YOUR_VIDEO_ID placeholder is hidden automatically,
+           so you can keep spare slots ready and just paste a link in when a film is done.
            Order matters: tiles go in sets of three (1 large + 2 small),
            so put your strongest film first in each set.
            ========================================================= */
@@ -99,6 +103,9 @@
             { title: "Countryside Wedding",     category: "Wedding",  video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
             { title: "Aerial Reel",             category: "Drone",    video: "https://www.youtube.com/watch?v=YOUR_VIDEO_ID" },
         ];
+
+        // Only films with a real link (and not marked hidden) appear on the page
+        const VISIBLE = PROJECTS.filter(p => !p.hidden && p.video && !p.video.includes("YOUR_VIDEO_ID"));
 
         /* ---------- helpers ---------- */
         function parseVideo(url) {
@@ -172,7 +179,7 @@
 
         /* ---------- filters ---------- */
         function buildFilters() {
-            const cats = ["All", ...new Set(PROJECTS.map(p => p.category).filter(Boolean))];
+            const cats = ["All", ...new Set(VISIBLE.map(p => p.category).filter(Boolean))];
             const box = document.getElementById("filters");
             if (cats.length < 3) { box.remove(); return; } // no point filtering a single category
             box.innerHTML = cats.map((c, i) =>
@@ -186,7 +193,7 @@
                     b.classList.toggle("text-zinc-300", !on); b.classList.toggle("border-zinc-700", !on);
                 });
                 const cat = btn.dataset.cat;
-                render(cat === "All" ? PROJECTS : PROJECTS.filter(p => p.category === cat));
+                render(cat === "All" ? VISIBLE : VISIBLE.filter(p => p.category === cat));
             });
         }
 
@@ -218,7 +225,7 @@
 
         document.getElementById("year").textContent = new Date().getFullYear();
         buildFilters();
-        render(PROJECTS);
+        render(VISIBLE);
     </script>
 </body>
 </html>

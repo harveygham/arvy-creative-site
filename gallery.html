@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | arvy.creative</title>
+    <meta name="description" content="Photography by arvy.creative: wildlife, vehicles, events and more.">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .album img, .shot img { transition: transform .8s cubic-bezier(.2,.7,.2,1), filter .4s ease; }
+        .album:hover img, .album:focus-visible img { transform: scale(1.05); }
+        .album .album-cta { transition: transform .3s ease, background-color .3s ease, color .3s ease; }
+        .album:hover .album-cta, .album:focus-visible .album-cta { transform: translateX(4px); background:#fff; color:#09090b; }
+        .shot:hover img { transform: scale(1.03); filter: brightness(.85); }
+        .masonry { column-gap: 4px; }
+        .masonry > * { break-inside: avoid; margin-bottom: 4px; }
+        .fade-up { opacity: 0; transform: translateY(16px); transition: opacity .7s ease, transform .7s ease; }
+        .fade-up.in { opacity: 1; transform: none; }
+        body.lightbox-open { overflow: hidden; }
+        @media (prefers-reduced-motion: reduce) { .fade-up { opacity: 1; transform: none; } .album img, .shot img { transition: none; } }
+    </style>
+</head>
+<body class="bg-zinc-950 text-zinc-200 font-sans antialiased selection:bg-zinc-700">
+
+    <!-- Header -->
+    <header class="absolute top-0 inset-x-0 z-20 max-w-6xl mx-auto w-full p-6 md:p-12 flex justify-between items-center">
+        <a href="/" class="text-2xl md:text-3xl font-bold tracking-tighter text-white">arvy.creative</a>
+        <nav class="hidden md:flex gap-8 text-sm font-medium tracking-wide">
+            <a href="/#about" class="hover:text-white transition-colors">ABOUT</a>
+            <a href="/projects" class="hover:text-white transition-colors">PROJECTS</a>
+            <a href="/gallery" class="text-white">GALLERY</a>
+            <a href="mailto:harvey.gilham@outlook.com" class="hover:text-white transition-colors">CONTACT</a>
+        </nav>
+        <a href="/" class="md:hidden text-xs font-medium tracking-wide hover:text-white">&larr; HOME</a>
+    </header>
+
+    <!-- Page heading -->
+    <section class="relative pt-36 md:pt-48 pb-12">
+        <div class="max-w-6xl mx-auto px-6 md:px-12">
+            <p class="text-xs font-medium tracking-widest text-zinc-500 mb-4">
+                <a href="/" class="hover:text-white transition-colors">HOME</a> <span class="mx-2">&rsaquo;</span> GALLERY
+            </p>
+            <h2 class="text-3xl md:text-5xl font-extrabold leading-tight text-white mb-4">Photography</h2>
+            <p class="text-zinc-400 max-w-2xl">
+                Stills from behind the camera. Pick a collection to see the full set in full resolution.
+            </p>
+        </div>
+    </section>
+
+    <!-- Collections (link out to Pic-Time) -->
+    <section class="max-w-6xl mx-auto px-6 md:px-12">
+        <div class="flex items-baseline justify-between mb-6">
+            <p class="text-xs font-semibold tracking-[0.35em] uppercase text-zinc-400">Collections</p>
+            <p id="album-count" class="text-xs tracking-widest text-zinc-600"></p>
+        </div>
+        <div id="albums" class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6"></div>
+    </section>
+
+    <!-- Highlights (self-hosted photos, optional) -->
+    <section id="highlights-wrap" class="hidden mt-20 md:mt-28">
+        <div class="max-w-6xl mx-auto px-6 md:px-12 mb-6">
+            <p class="text-xs font-semibold tracking-[0.35em] uppercase text-zinc-400">Highlights</p>
+        </div>
+        <div id="highlights" class="masonry columns-2 md:columns-3 lg:columns-4 px-1"></div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="border-t border-zinc-900 mt-20">
+        <div class="max-w-6xl mx-auto px-6 md:px-12 py-12 flex flex-col md:flex-row gap-6 md:items-center md:justify-between">
+            <div>
+                <p class="text-white text-xl font-bold mb-1">Need photos for your event?</p>
+                <p class="text-zinc-400 text-sm">Get in touch and let's talk about what you need.</p>
+            </div>
+            <a href="mailto:harvey.gilham@outlook.com"
+               class="inline-flex items-center gap-2 px-5 py-3 rounded-md bg-white text-zinc-950 text-sm font-bold tracking-wide hover:bg-zinc-200 transition-colors self-start">
+                LET'S WORK TOGETHER <span aria-hidden="true">&rarr;</span>
+            </a>
+        </div>
+        <p class="max-w-6xl mx-auto px-6 md:px-12 pb-8 text-xs text-zinc-600">&copy; <span id="year"></span> arvy.creative</p>
+    </footer>
+
+    <!-- Photo lightbox -->
+    <div id="lightbox" class="fixed inset-0 z-50 hidden items-center justify-center bg-black/95" role="dialog" aria-modal="true" aria-label="Photo viewer">
+        <button id="lb-close" class="absolute top-4 right-4 md:top-6 md:right-6 text-zinc-300 hover:text-white text-4xl leading-none z-10" aria-label="Close">&times;</button>
+        <button id="lb-prev" class="absolute left-2 md:left-6 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white text-5xl p-3 z-10" aria-label="Previous photo">&lsaquo;</button>
+        <button id="lb-next" class="absolute right-2 md:right-6 top-1/2 -translate-y-1/2 text-zinc-400 hover:text-white text-5xl p-3 z-10" aria-label="Next photo">&rsaquo;</button>
+        <figure class="max-w-[92vw] max-h-[88vh] flex flex-col items-center">
+            <img id="lb-img" src="" alt="" class="max-w-full max-h-[80vh] object-contain shadow-2xl">
+            <figcaption id="lb-cap" class="mt-4 text-xs font-medium uppercase tracking-widest text-zinc-400"></figcaption>
+        </figure>
+    </div>
+
+    <script>
+        /* =========================================================
+           YOUR COLLECTIONS — one entry per Pic-Time gallery.
+           title:  shown on the card
+           link:   the Pic-Time gallery link
+           cover:  the cover image. Pic-Time's own preview works, but for the
+                   sharpest result save a favourite shot to images/gallery/ and
+                   point to it, e.g. "images/gallery/wildlife-cover.jpg"
+                   (about 1600px wide, under 400 KB).
+           note:   optional short line under the title
+           hidden: true keeps an entry here but off the page
+           ========================================================= */
+        const ALBUMS = [
+            {
+                title: "Animals & Wildlife",
+                note: "Out in the woods and fields",
+                link: "https://arvyswrld.pic-time.com/aff3AzGvO9m12",
+                cover: "https://pictime5neu1public-pub-fbevadhjh6c7b2d9.a02.azurefd.net/pictures/49/807/49807370/homepage/smallres/homepage.jpg?rs=134327338068885601",
+            },
+            {
+                title: "Planes, Trains & Automobiles",
+                note: "Anything with an engine",
+                link: "https://arvyswrld.pic-time.com/9JBynTEZn7d06",
+                cover: "https://d2ip5x9pbfjgm5.cloudfront.net/pictures/49/777/49777237/homepage/smallres/homepage.jpg?rs=134104398384722955",
+            },
+        ];
+
+        /* =========================================================
+           HIGHLIGHTS (optional) — individual favourite photos shown on this
+           page in a grid you can click through. Save them in images/gallery/
+           (about 2000px on the long edge, under 500 KB each).
+           The section stays hidden until you add at least one.
+           e.g. { src: "images/gallery/fox.jpg", caption: "Fox, New Forest" },
+           ========================================================= */
+        const PHOTOS = [
+        ];
+
+        const esc = s => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+        /* ---------- collections ---------- */
+        const albums = ALBUMS.filter(a => !a.hidden && a.link);
+        document.getElementById("album-count").textContent = albums.length ? `${albums.length} ${albums.length === 1 ? "COLLECTION" : "COLLECTIONS"}` : "";
+        document.getElementById("albums").innerHTML = albums.map((a, i) => `
+            <a href="${esc(a.link)}" target="_blank" rel="noopener"
+               class="album fade-up group relative block aspect-[4/3] overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900 shadow-xl ${albums.length % 2 === 1 && i === albums.length - 1 ? "md:col-span-2 md:aspect-[21/9]" : ""}">
+                <span class="absolute inset-0 flex items-center justify-center p-6 text-center text-zinc-700 text-3xl md:text-4xl font-extrabold tracking-tighter select-none">${esc(a.title)}</span>
+                ${a.cover ? `<img src="${esc(a.cover)}" alt="${esc(a.title)} cover photo" loading="lazy" class="absolute inset-0 w-full h-full object-cover" onerror="this.remove()">` : ""}
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent pointer-events-none"></div>
+                <div class="absolute inset-x-0 bottom-0 p-6 md:p-8 flex items-end justify-between gap-4">
+                    <div>
+                        <p class="text-[11px] font-medium tracking-widest text-zinc-300 mb-1 uppercase">${String(i + 1).padStart(2, "0")}${a.note ? " &middot; " + esc(a.note) : ""}</p>
+                        <h3 class="text-white font-extrabold uppercase tracking-tight text-2xl md:text-3xl">${esc(a.title)}</h3>
+                    </div>
+                    <span class="album-cta shrink-0 inline-flex items-center gap-2 px-4 py-2.5 rounded-md border border-white/70 text-white text-xs font-bold tracking-wide">
+                        VIEW <span aria-hidden="true">&nearr;</span>
+                    </span>
+                </div>
+            </a>`).join("") || `<p class="text-zinc-500">New collections coming soon.</p>`;
+
+        /* ---------- highlights ---------- */
+        const photos = PHOTOS.filter(p => p.src);
+        if (photos.length) {
+            document.getElementById("highlights-wrap").classList.remove("hidden");
+            document.getElementById("highlights").innerHTML = photos.map((p, i) => `
+                <button type="button" data-i="${i}" class="shot fade-up block w-full overflow-hidden bg-zinc-900 cursor-zoom-in">
+                    <img src="${esc(p.src)}" alt="${esc(p.caption || "Photo")}" loading="lazy" class="w-full h-auto block">
+                </button>`).join("");
+        }
+
+        /* ---------- lightbox ---------- */
+        const lb = document.getElementById("lightbox"), lbImg = document.getElementById("lb-img"), lbCap = document.getElementById("lb-cap");
+        let cur = 0, lastFocus = null;
+        function show(i) {
+            cur = (i + photos.length) % photos.length;
+            lbImg.src = photos[cur].src; lbImg.alt = photos[cur].caption || "Photo";
+            lbCap.textContent = `${photos[cur].caption ? photos[cur].caption + "  ·  " : ""}${cur + 1} / ${photos.length}`;
+        }
+        function open(i) {
+            lastFocus = document.activeElement; show(i);
+            lb.classList.remove("hidden"); lb.classList.add("flex");
+            document.body.classList.add("lightbox-open");
+            document.getElementById("lb-close").focus();
+        }
+        function close() {
+            lb.classList.add("hidden"); lb.classList.remove("flex");
+            document.body.classList.remove("lightbox-open");
+            if (lastFocus) lastFocus.focus();
+        }
+        document.getElementById("highlights").addEventListener("click", e => { const b = e.target.closest(".shot"); if (b) open(+b.dataset.i); });
+        document.getElementById("lb-close").addEventListener("click", close);
+        document.getElementById("lb-prev").addEventListener("click", () => show(cur - 1));
+        document.getElementById("lb-next").addEventListener("click", () => show(cur + 1));
+        lb.addEventListener("click", e => { if (e.target === lb) close(); });
+        document.addEventListener("keydown", e => {
+            if (lb.classList.contains("hidden")) return;
+            if (e.key === "Escape") close();
+            if (e.key === "ArrowLeft") show(cur - 1);
+            if (e.key === "ArrowRight") show(cur + 1);
+        });
+        let touchX = null;
+        lb.addEventListener("touchstart", e => { touchX = e.touches[0].clientX; }, { passive: true });
+        lb.addEventListener("touchend", e => {
+            if (touchX === null) return;
+            const dx = e.changedTouches[0].clientX - touchX; touchX = null;
+            if (Math.abs(dx) > 50) show(cur + (dx < 0 ? 1 : -1));
+        });
+
+        /* ---------- gentle fade-in on scroll ---------- */
+        const io = "IntersectionObserver" in window ? new IntersectionObserver(entries => {
+            entries.forEach(en => { if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); } });
+        }, { threshold: 0.1 }) : null;
+        document.querySelectorAll(".fade-up").forEach((el, i) => {
+            el.style.transitionDelay = `${Math.min(i, 6) * 80}ms`;
+            io ? io.observe(el) : el.classList.add("in");
+        });
+
+        document.getElementById("year").textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
